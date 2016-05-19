@@ -7,8 +7,10 @@
         <!--android:startColor="#81C784"-->
         <!--android:type="linear" />-->
     <gradient
-        android:angle="0"
-        android:startColor="@color/colorAccent"
-        android:endColor="@android:color/transparent"
+        android:angle="180"
+        android:startColor="@android:color/transparent"
+        android:centerColor="#66000000"
+        android:useLevel="false"
+        android:centerX="2"
         android:type="linear" />
 </shape>

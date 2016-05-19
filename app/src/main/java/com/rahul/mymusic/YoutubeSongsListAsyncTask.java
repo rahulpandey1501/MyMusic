@@ -8,7 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.rahul.mymusic.Adapter.RecyclerViewAdapter;
+import com.rahul.mymusic.Adapter.YoutubeRecyclerAdapter;
 import com.rahul.mymusic.Helper.Constants;
 import com.rahul.mymusic.Helper.Information;
 
@@ -56,7 +56,7 @@ public class YoutubeSongsListAsyncTask extends AsyncTask<String, Void, String> {
                 if (link.getElementsByClass("playVideo").size() != 0) {
                     Information information = new Information();
                     information.link = "http://"+link.select("div.playVideo").select("a").attr("href");
-                    information.title = link.select("*[class^=opacity]").first().ownText();
+                    information.title = link.select("*[class^=opacity]").first().ownText().replace("\"", "");
                     information.duration = link.select("*[class^=opacity]").get(1).text();
                     information.duration = information.duration.replace("Duration • ", "");
                     String image = link.select("div").attr("style");
@@ -79,7 +79,7 @@ public class YoutubeSongsListAsyncTask extends AsyncTask<String, Void, String> {
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         Log.d("list", list.size() + "");
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
-        recyclerView.setAdapter(new RecyclerViewAdapter(mContext, list));
+        recyclerView.setAdapter(new YoutubeRecyclerAdapter(mContext, list));
         recyclerView.setVisibility(View.VISIBLE);
         view.findViewById(R.id.progressbar).setVisibility(View.GONE);
         super.onPostExecute(s);

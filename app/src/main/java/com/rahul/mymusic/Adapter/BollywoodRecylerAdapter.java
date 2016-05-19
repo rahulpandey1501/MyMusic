@@ -236,14 +236,15 @@ public class BollywoodRecylerAdapter extends RecyclerView.Adapter<BollywoodRecyl
 
     public void showDialogOption(final String... params){
         final List<String> tempList = new ArrayList<>();
-        tempList.add("Play");
-        tempList.add("External download");
-        tempList.add("Internal download (Exp)");
+        tempList.add("✏  Play");
+        tempList.add("✏  External downloader");
+        tempList.add("✏  Inbuilt downloader");
         Log.d("artist dialog", detail.artist.size() + "");
-        tempList.add("<<---- Something more for you ---->>");
+        if (detail.artist.size() > 0)
+            tempList.add("ıllıllı    Recommended For You    ıllıllı");
         for (String key : detail.artist.keySet()){
             Log.d("artist dialog", key+detail.artist.get(key));
-            tempList.add(key);
+            tempList.add("♫  "+key);
         }
         final CharSequence options[] = new CharSequence[tempList.size()];
         tempList.toArray(options);
@@ -267,7 +268,7 @@ public class BollywoodRecylerAdapter extends RecyclerView.Adapter<BollywoodRecyl
                     case 3:
                         break;
                     default:
-                        new FetchDetailAsyncTask().execute(detail.artist.get(tempList.get(which)), options[which].toString());
+                        new FetchDetailAsyncTask().execute(detail.artist.get(tempList.get(which).replace("♫  ", "")), options[which].toString());
                 }
             }
         });

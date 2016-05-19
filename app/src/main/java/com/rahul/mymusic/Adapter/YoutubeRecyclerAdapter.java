@@ -46,7 +46,7 @@ import java.util.List;
 /**
  * Created by Rahul on 10 Apr 2016.
  */
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.CustomViewHolder>{
+public class YoutubeRecyclerAdapter extends RecyclerView.Adapter<YoutubeRecyclerAdapter.CustomViewHolder>{
     private List<Information> list;
     private Context context;
     private LayoutInflater inflater;
@@ -58,7 +58,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private long lastDownload=-1L;
     ProgressDialog progressDialog;
 
-    public RecyclerViewAdapter(Context context, List<Information> list){
+    public YoutubeRecyclerAdapter(Context context, List<Information> list){
         progressDialog = new ProgressDialog(context);
         inflater = LayoutInflater.from(context);
         this.context = context;
@@ -220,7 +220,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             Log.d("enter validity post", validServer_1+"");
             progressDialog.hide();
             if (validServer_1) {
-                startDownloadManager(params[3], fileName);
+                if (playMusic)
+                    playMusic(params[3]);
+                else
+                    startDownloadManager(params[3], fileName);
             }
             else {
                 new ResponseAsyncTaskForServer2().execute(params);
@@ -368,7 +371,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public void showDialogOption(final String... params){
-        CharSequence options[] = new CharSequence[] {"Play", "External download", "Internal download (Exp)"};
+        CharSequence options[] = new CharSequence[] {"✏  Play", "✏  External downloader", "✏  Inbuilt downloader"};
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
@@ -377,7 +380,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     case 0:
                         playMusic = true;
                         longPressed = true;
-                        new ResponseAsyncTaskForServer2().execute(params);
+                        showProgressDialog();
+                        checkForServer_1(params);
+//                        new ResponseAsyncTaskForServer2().execute(params);
                         break;
                     case 1:
                         playMusic = false;

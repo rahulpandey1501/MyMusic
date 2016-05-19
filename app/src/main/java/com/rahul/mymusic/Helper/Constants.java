@@ -13,6 +13,7 @@ public class Constants {
             "num=10&hl=en&prettyPrint=false&source=gcsc&gss=.in&" +
             "sig=432dd570d1a386253361f581254f9ca1&cx=015279129310856890483:oz1lrhqkxro&" +
             "sort=&googlehost=www.google.com&q=";
-    public static final String BOLLYWOOD_MUSIC_URL = "http://songspk.city";
+    public static final String BOLLYWOOD_MUSIC_URL = "http://songsbling.com";
     public static final String[] IGNORE_LIST = {"writter", "size", "bitrate", "composer"};
+    public static final String UPDATE_CHECKER_URL = "http://rahulpandey1501-appupdates.blogspot.in/";
 }
